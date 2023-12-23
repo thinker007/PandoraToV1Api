@@ -10,4 +10,22 @@ services:
       - ./log:/app/log
       - ./images:/app/images
       - ./data:/app/data
-    
+    environment:
+      - TZ=Asia/Shanghai
+
+    depends_on:
+      - pandoraNext
+
+  pandoraNext:
+    image: pengzhile/pandora-next
+    container_name: PandoraNext
+    restart: always
+    expose:
+      - "8181"
+    ports:
+      - "8181:8181"
+    volumes:
+      - ./data:/data
+      - ./sessions:/root/.cache/PandoraNext
+    environment:
+      - TZ=Asia/Shanghai
